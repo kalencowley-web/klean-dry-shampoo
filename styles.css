@@ -444,6 +444,13 @@ em {
 
 .bottle-mock.small { width: 100px; height: 200px; }
 
+.bottle-photo {
+  width: 220px;
+  height: auto;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+}
+
 .bottle-cap {
   position: absolute;
   top: -18px;
