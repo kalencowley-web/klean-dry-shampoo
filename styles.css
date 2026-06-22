@@ -60,13 +60,32 @@ body {
   margin: 0;
   font-family: var(--font-body);
   color: var(--color-text);
-  background: var(--color-bg);
+  background-color: var(--color-primary-tint);
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--color-primary-stripe) 0px,
+    var(--color-primary-stripe) 4px,
+    transparent 4px,
+    transparent 32px
+  );
   -webkit-font-smoothing: antialiased;
   line-height: 1.5;
+}
+
+/* Readable "card" surface for content that sits over the striped background */
+.panel {
+  background: var(--color-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
 }
 img, svg { display: block; max-width: 100%; }
 ul, ol { margin: 0; padding: 0; }
 button { font-family: inherit; }
+
+/* Contains horizontal slide-in transforms so they can't create page-level
+   horizontal scroll before/between reveals; header sits outside <main>
+   so position: sticky there is unaffected. */
+#main { overflow-x: hidden; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -193,6 +212,10 @@ em {
   max-width: 620px;
   margin: 0 auto var(--space-10) auto;
   text-align: center;
+  background: var(--color-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-8) var(--space-6);
 }
 
 .section-sub {
@@ -333,6 +356,13 @@ em {
   align-items: center;
 }
 
+.hero-copy {
+  background: var(--color-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-8);
+}
+
 .hero h1 { color: var(--color-text); }
 
 .hero-sub {
@@ -451,9 +481,6 @@ em {
 .badge-bottom { bottom: 10%; left: -8%; }
 
 /* ============================================
-   STATS / SOCIAL PROOF
-   ============================================ */
-/* ============================================
    CERTIFICATION BADGES
    ============================================ */
 .certs {
@@ -466,6 +493,10 @@ em {
   align-items: flex-start;
   gap: var(--space-8);
   flex-wrap: wrap;
+  background: var(--color-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-6) var(--space-8);
 }
 
 .cert-badge {
@@ -528,6 +559,7 @@ section { padding: var(--space-12) 0; }
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: var(--space-6);
+  box-shadow: var(--shadow-sm);
   transition: transform var(--t-base) var(--ease), box-shadow var(--t-base) var(--ease), border-color var(--t-base) var(--ease);
 }
 .card:hover {
@@ -555,17 +587,19 @@ section { padding: var(--space-12) 0; }
 /* ============================================
    PROCESS
    ============================================ */
-.process { background: var(--color-bg-subtle); }
-
 .process-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-8);
+  gap: var(--space-5);
 }
 
 .process-step {
   text-align: center;
   position: relative;
+  background: var(--color-bg);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-8) var(--space-6);
 }
 
 .step-number {
@@ -612,6 +646,12 @@ section { padding: var(--space-12) 0; }
   opacity: 0.7;
 }
 
+.mission-copy {
+  background: var(--color-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-8);
+}
 .mission-copy p { margin-top: var(--space-4); font-size: 1.02rem; }
 .mission-copy h2 { margin-top: 0; }
 
@@ -643,6 +683,7 @@ section { padding: var(--space-12) 0; }
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: var(--space-6);
+  box-shadow: var(--shadow-sm);
 }
 
 .stars { color: var(--color-primary); letter-spacing: 2px; margin-bottom: var(--space-4); }
@@ -684,15 +725,13 @@ figcaption small {
 /* ============================================
    SHOP
    ============================================ */
-.shop { background: var(--color-bg-subtle); }
-
 .shop-grid {
   display: grid;
   grid-template-columns: 0.6fr 1fr;
   gap: var(--space-10);
   align-items: center;
   background: var(--color-bg);
-  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-md);
   border-radius: var(--radius-lg);
   padding: var(--space-10);
 }
@@ -715,7 +754,10 @@ figcaption small {
 .accordion {
   max-width: 720px;
   margin: 0 auto;
-  border-top: 1px solid var(--color-border);
+  background: var(--color-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-3) var(--space-6);
 }
 
 .accordion-item {
@@ -892,7 +934,7 @@ figcaption small {
   .nav-actions .btn-sm { display: none; }
   .nav-toggle { display: flex; }
 
-  .certs-grid { gap: var(--space-6) var(--space-5); }
+  .certs-grid { gap: var(--space-6) var(--space-5); padding: var(--space-6) var(--space-5); }
   .cert-badge { width: 88px; }
   .cert-icon { width: 48px; height: 48px; }
   .cert-icon svg { width: 22px; height: 22px; }
@@ -902,6 +944,15 @@ figcaption small {
   .footer-bottom { flex-direction: column; gap: var(--space-4); text-align: center; }
   .hero-cta { flex-direction: column; align-items: stretch; }
   .hero-cta .btn { width: 100%; }
+
+  .hero-copy,
+  .mission-copy,
+  .section-head,
+  .process-step {
+    padding: var(--space-6) var(--space-5);
+  }
+  .shop-grid { padding: var(--space-6) var(--space-5); }
+  .accordion { padding: var(--space-2) var(--space-4); }
 }
 
 /* ============================================
