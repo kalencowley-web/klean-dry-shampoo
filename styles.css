@@ -402,24 +402,6 @@ em {
   min-height: 420px;
 }
 
-.hero-stripe-panel {
-  position: absolute;
-  width: 320px;
-  height: 320px;
-  border-radius: var(--radius-lg);
-  background-color: var(--color-primary-tint);
-  background-image: repeating-linear-gradient(
-    115deg,
-    var(--color-primary-stripe) 0px,
-    var(--color-primary-stripe) 3px,
-    transparent 3px,
-    transparent 22px
-  );
-  z-index: 0;
-  transition: transform 0.1s linear;
-  will-change: transform;
-}
-
 .bottle-card {
   position: relative;
   z-index: 1;

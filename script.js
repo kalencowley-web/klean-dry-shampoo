@@ -56,10 +56,9 @@ if (prefersReducedMotion) {
   revealEls.forEach((el) => el.classList.add('in-view'));
 }
 
-// Scroll-driven chrome: shrinking nav, back-to-top, hero parallax
+// Scroll-driven chrome: shrinking nav, back-to-top
 const siteHeader = document.querySelector('.site-header');
 const backToTop = document.getElementById('back-to-top');
-const heroStripePanel = document.getElementById('hero-stripe-panel');
 
 let lastScrollY = -1;
 let scrollTicking = false;
@@ -69,10 +68,6 @@ function updateOnScroll() {
 
   if (siteHeader) siteHeader.classList.toggle('scrolled', y > 8);
   if (backToTop) backToTop.classList.toggle('visible', y > 700);
-
-  if (heroStripePanel && !prefersReducedMotion) {
-    heroStripePanel.style.transform = `translateY(${Math.min(y * 0.12, 60)}px)`;
-  }
 
   scrollTicking = false;
 }
