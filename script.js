@@ -98,3 +98,101 @@ if (backToTop) {
     window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
   });
 }
+
+// Cart: a single-product demo cart persisted in localStorage, since
+// there's no backend. Shared across pages via the nav cart badge.
+const CART_KEY = 'kleanCartQty';
+const CART_PRICE = 14.99;
+
+function getCartQty() {
+  return parseInt(localStorage.getItem(CART_KEY), 10) || 0;
+}
+
+function setCartQty(qty) {
+  const clamped = Math.max(0, qty);
+  localStorage.setItem(CART_KEY, String(clamped));
+  updateCartBadge();
+  return clamped;
+}
+
+function updateCartBadge() {
+  const qty = getCartQty();
+  document.querySelectorAll('.cart-badge').forEach((badge) => {
+    badge.textContent = String(qty);
+    badge.hidden = qty === 0;
+  });
+}
+
+updateCartBadge();
+
+const addToCartBtn = document.getElementById('add-to-cart-btn');
+if (addToCartBtn) {
+  addToCartBtn.addEventListener('click', () => {
+    setCartQty(getCartQty() + 1);
+  });
+}
+
+// Cart page only
+const cartItemEl = document.getElementById('cart-item');
+if (cartItemEl) {
+  const cartEmptyEl = document.getElementById('cart-empty');
+  const cartSummaryEl = document.getElementById('cart-summary');
+  const qtyValueEl = document.getElementById('qty-value');
+  const lineTotalEl = document.getElementById('line-total');
+  const subtotalEl = document.getElementById('cart-subtotal');
+  const totalEl = document.getElementById('cart-total');
+  const decreaseBtn = document.getElementById('qty-decrease');
+  const increaseBtn = document.getElementById('qty-increase');
+  const removeBtn = document.getElementById('remove-item');
+  const checkoutBtn = document.getElementById('checkout-btn');
+  const checkoutNote = document.getElementById('checkout-note');
+
+  function formatPrice(n) {
+    return `$${n.toFixed(2)}`;
+  }
+
+  function renderCart() {
+    const qty = getCartQty();
+    const hasItem = qty > 0;
+
+    cartItemEl.hidden = !hasItem;
+    cartSummaryEl.hidden = !hasItem;
+    cartEmptyEl.hidden = hasItem;
+
+    if (hasItem) {
+      const lineTotal = qty * CART_PRICE;
+      qtyValueEl.textContent = String(qty);
+      lineTotalEl.textContent = formatPrice(lineTotal);
+      subtotalEl.textContent = formatPrice(lineTotal);
+      totalEl.textContent = formatPrice(lineTotal);
+      decreaseBtn.disabled = qty <= 1;
+    }
+  }
+
+  // First-time visitors land with an empty cart instead of a default 1,
+  // so the empty state is reachable without manually clearing storage.
+  if (localStorage.getItem(CART_KEY) === null) {
+    setCartQty(0);
+  }
+
+  renderCart();
+
+  decreaseBtn.addEventListener('click', () => {
+    setCartQty(getCartQty() - 1);
+    renderCart();
+  });
+  increaseBtn.addEventListener('click', () => {
+    setCartQty(getCartQty() + 1);
+    renderCart();
+  });
+  removeBtn.addEventListener('click', () => {
+    setCartQty(0);
+    renderCart();
+    if (checkoutNote) checkoutNote.hidden = true;
+  });
+  if (checkoutBtn && checkoutNote) {
+    checkoutBtn.addEventListener('click', () => {
+      checkoutNote.hidden = false;
+    });
+  }
+}

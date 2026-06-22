@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=4">
+<link rel="stylesheet" href="styles.css?v=5">
 <noscript><style>[data-reveal] { opacity: 1 !important; transform: none !important; }</style></noscript>
 </head>
 <body>
@@ -51,6 +51,10 @@
     </nav>
 
     <div class="nav-actions">
+      <a href="cart.html" class="cart-link" aria-label="View cart">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M6 6h15l-1.5 9h-12.5z"/><path d="M6 6 5 3H2"/><circle cx="9.5" cy="20" r="1.4"/><circle cx="17.5" cy="20" r="1.4"/></svg>
+        <span class="cart-badge" id="cart-badge" hidden>0</span>
+      </a>
       <a href="#shop" class="btn btn-primary btn-sm">Shop now</a>
       <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle menu">
         <span></span><span></span><span></span>
@@ -225,7 +229,7 @@
         <h2>Klean Dry Shampoo</h2>
         <p class="price">$14.99 <span class="price-shipping">+ Shipping</span></p>
         <p class="section-sub">All-natural &middot; non-toxic &middot; cruelty-free. Includes a donation that helps give back to our Utah community.</p>
-        <a href="#" class="btn btn-primary btn-lg">Add to Cart</a>
+        <a href="cart.html" class="btn btn-primary btn-lg" id="add-to-cart-btn">Add to Cart</a>
       </div>
     </div>
   </section>
@@ -377,6 +381,6 @@
   <svg class="icon" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
 </button>
 
-<script src="script.js?v=4"></script>
+<script src="script.js?v=5"></script>
 </body>
 </html>
