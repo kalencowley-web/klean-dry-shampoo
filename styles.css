@@ -334,7 +334,13 @@ em {
   .hf-3, .hf-4 { display: none; }
 }
 @media (max-width: 720px) {
-  .header-flowers { display: none; }
+  /* Nav links collapse behind the hamburger here, freeing the center
+     of the bar — keep a small, curated set clear of the logo and
+     toggle button instead of hiding flowers entirely. */
+  .hf-2, .hf-4, .hf-5 { display: none; }
+  .hf-1 { top: -10px; left: 1%; width: 16px; }
+  .hf-3 { display: block; top: 22px; left: 58%; width: 18px; }
+  .hf-6 { top: -10px; right: 1%; width: 16px; }
 }
 
 .logo {
