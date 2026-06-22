@@ -56,9 +56,14 @@ if (prefersReducedMotion) {
   revealEls.forEach((el) => el.classList.add('in-view'));
 }
 
-// Scroll-driven chrome: shrinking nav, back-to-top
+// Scroll-driven chrome: shrinking nav, back-to-top, spinning header flowers
 const siteHeader = document.querySelector('.site-header');
 const backToTop = document.getElementById('back-to-top');
+const headerFlowers = Array.from(document.querySelectorAll('.header-flower')).map((el) => ({
+  el,
+  base: parseFloat(el.dataset.base) || 0,
+  spin: parseFloat(el.dataset.spin) || 0,
+}));
 
 let lastScrollY = -1;
 let scrollTicking = false;
@@ -68,6 +73,11 @@ function updateOnScroll() {
 
   if (siteHeader) siteHeader.classList.toggle('scrolled', y > 8);
   if (backToTop) backToTop.classList.toggle('visible', y > 700);
+
+  headerFlowers.forEach(({ el, base, spin }) => {
+    const scrollSpin = prefersReducedMotion ? 0 : y * spin;
+    el.style.transform = `rotate(${base + scrollSpin}deg)`;
+  });
 
   scrollTicking = false;
 }

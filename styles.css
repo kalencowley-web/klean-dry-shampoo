@@ -285,6 +285,8 @@ em {
 }
 
 .nav-row {
+  position: relative;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -293,6 +295,46 @@ em {
 }
 .site-header.scrolled .nav-row {
   height: 62px;
+}
+
+/* ============================================
+   HEADER FLOWER CLIPART
+   ============================================ */
+.header-flowers {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.header-flower {
+  position: absolute;
+  display: block;
+  aspect-ratio: 1 / 1;
+  will-change: transform;
+}
+.header-flower svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.flower-pink { color: var(--color-primary-stripe); --flower-center-color: var(--color-accent-light); }
+.flower-blue { color: var(--color-primary-light); --flower-center-color: var(--color-primary-stripe); }
+
+.hf-1 { top: 6px;   left: 1%;   width: 30px; opacity: 0.55; }
+.hf-2 { top: -12px; left: 12%;  width: 20px; opacity: 0.4; }
+.hf-3 { top: 18px;  left: 46%;  width: 16px; opacity: 0.3; }
+.hf-4 { top: -10px; right: 24%; width: 22px; opacity: 0.4; }
+.hf-5 { top: 14px;  right: 9%;  width: 26px; opacity: 0.5; }
+.hf-6 { top: -8px;  right: 1%;  width: 32px; opacity: 0.5; }
+
+@media (max-width: 980px) {
+  .hf-3, .hf-4 { display: none; }
+}
+@media (max-width: 720px) {
+  .header-flowers { display: none; }
 }
 
 .logo {
